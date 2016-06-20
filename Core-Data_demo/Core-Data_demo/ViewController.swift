@@ -8,11 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITableViewDataSource {
+	
+	//пустой строковый массив
+	var list = [String]()
+	
+	@IBOutlet weak var tableView: UITableView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		title = "The List"
+		
+		//зарегистрируем класс на ячеек
+		tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -20,6 +28,17 @@ class ViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
+	
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return list.count
+	}
+	
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		<#code#>
+	}
+
+	@IBAction func addButtonPressed(sender: AnyObject) {
+	}
 
 }
 
