@@ -46,6 +46,37 @@ class ViewController: UIViewController, UITableViewDataSource {
 
 	@IBAction func addButtonPressed(sender: AnyObject) {
 		
+		//создаем алерт
+		let alert = UIAlertController(title: "New item", message: "Add new item", preferredStyle: .Alert)
+		
+		let saveAction = UIAlertAction(title: "save", style: .Default) { (UIAlertAction) -> Void in
+			
+		//создать переменная с текстовым полем
+		let textField = alert.textFields?.first
+		
+		//в текствое поле добавить
+		self.list.append(textField!.text!)
+		
+		//обновлять значения
+		self.tableView.reloadData()
+			
+		}
+		
+		//действие которое будет отменять UIAlertController
+		let cancelAction = UIAlertAction(title: "cancel", style: .Default) { (UIAlertAction) -> Void in
+			
+		}
+		
+		//добавляем текстовое поле
+		alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
+		}
+		
+		//отображаем кнопки
+		alert.addAction(saveAction)
+		alert.addAction(cancelAction)
+		
+		presentViewController(alert, animated: true, completion: nil)
+
 		
 	}
 
