@@ -33,11 +33,20 @@ class ViewController: UIViewController, UITableViewDataSource {
 		return list.count
 	}
 	
+	// что должно отображаться в каждой ячейки
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		<#code#>
+		
+		//создаем ячейку
+		let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
+		
+		cell!.textLabel!.text = list[indexPath.row]
+		
+		return cell!
 	}
 
 	@IBAction func addButtonPressed(sender: AnyObject) {
+		
+		
 	}
 
 }
