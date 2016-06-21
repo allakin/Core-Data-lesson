@@ -90,10 +90,23 @@ class ViewController: UIViewController, UITableViewDataSource {
 		//находим контексту
 		let context = appDelegate.managedObjectContext
 		
-		//обращение к сущности
+		//обращение к сущности Car
 		let entity = NSEntityDescription.entityForName("Car", inManagedObjectContext: context)
 		
 		//создаем экземпляр
+		let car = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: context)
+		
+		//добавляем значения в марк
+		car.setValue(mark, forKey: "mark")
+		
+		//сохранить внесенные изменения
+		do {
+			try context.save()
+			cars.append(car)
+		} catch let error as NSError {
+			print("Localized error \(error.localizedDescription)")
+		}
+		
 		
 	}
 	
