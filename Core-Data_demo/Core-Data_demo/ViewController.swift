@@ -84,7 +84,16 @@ class ViewController: UIViewController, UITableViewDataSource {
 	//функция для чтобы сохранялись значение в saveMark
 	func saveMark(mark: String) {
 		
+		// обращение к файлу AppDelegate.swift
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		
+		//находим контексту
+		let context = appDelegate.managedObjectContext
+		
+		//обращение к сущности
+		let entity = NSEntityDescription.entityForName("Car", inManagedObjectContext: context)
+		
+		//создаем экземпляр
 		
 	}
 	
