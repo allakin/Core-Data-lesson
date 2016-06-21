@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource {
 	
 	//пустой строковый массив
-	var list = [String]()
+	var cars = [NSManagedObject]()
 	
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -30,7 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource {
 
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return list.count
+		return cars.count
 	}
 	
 	// что должно отображаться в каждой ячейки
@@ -39,7 +40,8 @@ class ViewController: UIViewController, UITableViewDataSource {
 		//создаем ячейку
 		let cell = tableView.dequeueReusableCellWithIdentifier("Cell")
 		
-		cell!.textLabel!.text = list[indexPath.row]
+		let car = cars[indexPath.row]
+		cell!.textLabel!.text = car.valueForKey("mark") as? String
 		
 		return cell!
 	}
@@ -55,7 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource {
 		let textField = alert.textFields?.first
 		
 		//в текствое поле добавить
-		self.list.append(textField!.text!)
+		self.saveMark(textField!.text!)
 		
 		//обновлять значения
 		self.tableView.reloadData()
@@ -76,9 +78,16 @@ class ViewController: UIViewController, UITableViewDataSource {
 		alert.addAction(cancelAction)
 		
 		presentViewController(alert, animated: true, completion: nil)
-
 		
 	}
 
+	//функция для чтобы сохранялись значение в saveMark
+	func saveMark(mark: String) {
+		
+		
+		
+	}
+	
+	
 }
 
