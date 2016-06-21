@@ -16,12 +16,35 @@ class ViewController: UIViewController, UITableViewDataSource {
 	
 	@IBOutlet weak var tableView: UITableView!
 	
+	//viewDidLoad метод который срабатывает один раз
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		title = "The List"
 		
 		//зарегистрируем класс на ячеек
 		tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+	}
+	
+	//viewWillAppear метод который срабатывает каждый раз когда есть какие то изменения в интерфейсе
+	override func viewWillAppear(animated: Bool) {
+		//перезаписывание класса viewWillAppear
+		super.viewWillAppear(animated)
+		
+		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		let context = appDelegate.managedObjectContext
+		
+		//создаем запрос к entity Car
+		let fetchRequest = NSFetchRequest(entityName: "Car")
+		
+		do{
+			//смотрим какие результаты там появились
+			let results = try context.executeFetchRequest(fetchRequest)
+			//приводим  results AnyObject в cars NSManagedObject
+			cars = results as! [NSManagedObject]
+		} catch let error as NSError {
+			print("Запрос данных из CoreData не прошел \(error.localizedDescription)")
+		}
+		
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -106,8 +129,6 @@ class ViewController: UIViewController, UITableViewDataSource {
 		} catch let error as NSError {
 			print("Localized error \(error.localizedDescription)")
 		}
-		
-		
 	}
 	
 	
