@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource {
-
+	
 	var cars		= [NSManagedObject]()
-
+	
 	@IBOutlet weak var tableView: UITableView!
 	
 	override func viewDidLoad() {
@@ -23,6 +23,25 @@ class ViewController: UIViewController, UITableViewDataSource {
 		
 		// регистрация класса ячейки
 		tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
+		let context = appDelegate?.managedObjectContext
+		
+		//задаем запрос к сущности Car
+		let fetchRequest = NSFetchRequest(entityName: "Car")
+		
+		do{
+			//смотрим какие результаты там появились
+			let results = try context!.executeFetchRequest(fetchRequest)
+			//приводим  results AnyObject в cars NSManagedObject
+			cars = results as! [NSManagedObject]
+		} catch let error as NSError {
+			print("Запрос данных из CoreData не прошел \(error.localizedDescription)")
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -81,8 +100,6 @@ class ViewController: UIViewController, UITableViewDataSource {
 			print("Localized error description \(error.localizedDescription)")
 		}
 		
-		
 	}
-
+	
 }
-
