@@ -43,6 +43,8 @@ class ViewController: UIViewController, UITableViewDataSource {
 			print("Запрос данных из CoreData не прошел \(error.localizedDescription)")
 		}
 	}
+
+	
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
